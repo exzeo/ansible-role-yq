@@ -22,10 +22,6 @@
   when: yq_version|length == 0
   tags: latest
 
-- name: debug
-  ansible.builtin.debug:
-    msg: "{{ yq_json_response }}"
-
 - name: Set Latest Version # noqa no-handler
   when: yq_version|length == 0
   ansible.builtin.set_fact:
