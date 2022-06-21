@@ -1,0 +1,15 @@
+---
+
+- name: Verify
+  hosts: all
+
+  tasks:
+    - name: Execute yq version to capture output
+      command: "yq --version"
+      register: yq_current_version
+      changed_when: false
+
+    - name: Ensure yq version output contains correct version string
+      assert:
+        that:
+          - yq_current_version.rc == 0

@@ -1,0 +1,42 @@
+---
+- name: Check Current yq Version
+  ansible.builtin.command: "yq --version"
+  register: "yq_current_version"
+  changed_when: yq_current_version.rc != 0
+  failed_when: false
+  tags:
+    - install
+    - check-current-version
+
+- name: Check latest yq
+  ansible.builtin.uri:
+    url: "https://api.github.com/repos/mikefarah/yq/releases/latest"
+    method: GET
+    return_content: true
+    status_code: 200
+    body_format: json
+  retries: 5
+  delay: 2
+  register: yq_json_response
+  when: yq_version|length == 0
+  tags: latest
+
+- name: Set Latest Version # noqa no-handler
+  when: yq_version|length == 0
+  ansible.builtin.set_fact:
+    yq_version: "{{ yq_json_response.json.tag_name | replace('v','') }}"
+  tags: latest
+
+- name: Download yq # noqa no-handler
+  ansible.builtin.get_url:
+    url: "{{ yq_download_url }}"
+    dest: "/usr/bin/yq"
+    mode: '0700'
+  register: download_archive
+  retries: 5
+  delay: 2
+  until: download_archive is success
+  when: yq_current_version.changed
+  tags:
+    - install
+    - download-archive
