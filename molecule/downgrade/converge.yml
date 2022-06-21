@@ -1,7 +1,0 @@
----
-- name: Install
-  hosts: all
-  roles:
-    - role: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
-      vars:
-        yq_version: "4.20.1"
