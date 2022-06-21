@@ -2,11 +2,16 @@
 - name: Check Current yq Version
   ansible.builtin.command: "yq --version"
   register: "yq_current_version"
-  changed_when: yq_current_version.rc != 0
+  changed_when: false
+
   failed_when: false
   tags:
     - install
     - check-current-version
+
+- name: debug
+  debug:
+    msg: "{{ yq_current_version }}"
 
 - name: Check latest yq
   ansible.builtin.uri:
@@ -36,7 +41,9 @@
   retries: 5
   delay: 2
   until: download_archive is success
-  when: yq_current_version.changed
+  when: > 
+    (yq_current_version.rc != 0) or
+    (yq_version not in yq_current_version.stdout) or
   tags:
     - install
     - download-archive
