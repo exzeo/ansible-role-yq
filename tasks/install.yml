@@ -9,10 +9,6 @@
     - install
     - check-current-version
 
-- name: debug
-  debug:
-    msg: "{{ yq_current_version }}"
-
 - name: Check latest yq
   ansible.builtin.uri:
     url: "https://api.github.com/repos/mikefarah/yq/releases/latest"
