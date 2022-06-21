@@ -10,4 +10,4 @@
   - name: Ensure yq is the correct version
     assert:
       that:
-        - "'4.20.0' in yq_current_version.stdout"
+        - "'4.20.1' in yq_current_version.stdout"

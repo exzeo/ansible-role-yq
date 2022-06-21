@@ -4,4 +4,4 @@
   roles:
     - role: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
       vars:
-        yq_version: "4.20.0"
+        yq_version: "4.20.1"
