@@ -23,7 +23,7 @@
   tags: latest
 
 - name: debug
-  debug:
+  ansible.builtin.debug:
     msg: "{{ yq_json_response }}"
 
 - name: Set Latest Version # noqa no-handler
