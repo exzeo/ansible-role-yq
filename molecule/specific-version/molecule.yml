@@ -11,9 +11,10 @@ platforms:
 
 provisioner:
   name: ansible
-  playbooks:
-    prepare: ../specific-version/converge.yml
-    converge: converge.yml
+  log: true
+  options:
+    vvv: true
+
 
 verifier:
   name: ansible
