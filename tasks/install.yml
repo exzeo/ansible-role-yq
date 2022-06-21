@@ -39,7 +39,7 @@
   until: download_archive is success
   when: > 
     (yq_current_version.rc != 0) or
-    (yq_version not in yq_current_version.stdout) or
+    (yq_version not in yq_current_version.stdout)
   tags:
     - install
     - download-archive
