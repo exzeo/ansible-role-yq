@@ -1,0 +1,7 @@
+---
+
+# Version of 'yq' to install, defaults to latest version
+yq_version: ""
+
+# Toggling this will uninstall from the server
+uninstall: false

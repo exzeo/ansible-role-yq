@@ -1,0 +1,8 @@
+---
+
+- name: Remove /usr/bin/yq
+  ansible.builtin.file:
+    state: absent
+    path: "/usr/bin/yq"
+  tags:
+    - uninstall
